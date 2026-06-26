@@ -1,6 +1,4 @@
 <?php
-
-
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: http://localhost:5173");
@@ -11,24 +9,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-
 session_start();
 
 require_once __DIR__ . '/../config/conexion.php';
 
-
 $id = intval($_GET["id_material"] ?? 0);
 
 if ($id <= 0) {
-
     echo json_encode([
         "success" => false,
         "error" => "ID inválido"
     ]);
-
     exit;
 }
-
 
 $sql = "SELECT * FROM material WHERE id_material = ?";
 

@@ -45,7 +45,6 @@ const handleSubmit = async () => {
     datos.append('email', email.value)
     datos.append('password', password.value)
 
-    console.log(API_URL + '/api/auth/crearUsuario.php')
     const res = await fetch(`${API_URL}/api/auth/crearUsuario.php`, {
       method: 'POST',
       body: datos,

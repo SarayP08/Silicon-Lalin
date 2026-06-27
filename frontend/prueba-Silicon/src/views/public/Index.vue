@@ -24,13 +24,9 @@ const login = async () => {
     if (redirect) {
       console.log();
       router.push(redirect);
-    } else {
-      if (auth.usuario.rol === "admin") {
-        router.push("/HomeAdmin");
       } else {
         router.push("/HomeUsuario");
       }
-    }
   } else {
     error.value = resultado.message;
   }
@@ -73,8 +69,6 @@ const login = async () => {
         <button class="btn btn-primary w-100 py-2" type="submit" :disabled="cargando">
           {{ cargando ? "Entrando..." : "Iniciar Sesión" }}
         </button>
-
-        <br /><br />
 
         <p class="text-body-secondary text-center">¿No tienes una cuenta? <a href="/Registro">Regístrate aquí</a></p>
       </form>

@@ -1,89 +1,87 @@
 <script setup>
-import { ref } from "vue"; 
-import { useRouter } from "vue-router"; 
-import { API_URL } from "../../config/api.js"; 
-import { useAuthStore } from "../../stores/auth.js"; 
-const router = useRouter();
-const auth = useAuthStore();
-const nombre = ref(""); 
-const apellidos = ref(""); 
-const email = ref(""); 
-const password = ref(""); 
-const confirmPassword = ref(""); 
-const mensaje = ref(""); 
-const cargando = ref(false); 
-const error = ref("");
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { API_URL } from '../../config/api.js'
+import { useAuthStore } from '../../stores/auth.js'
+const router = useRouter()
+const auth = useAuthStore()
+const nombre = ref('')
+const apellidos = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const mensaje = ref('')
+const cargando = ref(false)
+const error = ref('')
 
 const passwordValida = (valor) =>
   valor.length >= 8 &&
   /[a-z]/.test(valor) &&
   /[A-Z]/.test(valor) &&
   /\d/.test(valor) &&
-  /[^A-Za-z0-9\s]/.test(valor);
+  /[^A-Za-z0-9\s]/.test(valor)
 
 const handleSubmit = async () => {
-  error.value = "";
-  mensaje.value = "";
+  error.value = ''
+  mensaje.value = ''
 
   if (!passwordValida(password.value)) {
     error.value =
-      "La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula, un número y un carácter especial";
-    return;
+      'La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula, un número y un carácter especial'
+    return
   }
 
   if (password.value !== confirmPassword.value) {
-    error.value = "Las contraseñas no coinciden";
+    error.value = 'Las contraseñas no coinciden'
 
-    return;
+    return
   }
 
   try {
-    cargando.value = true;
-    const datos = new FormData();
-    datos.append("nombre", nombre.value);
-    datos.append("apellidos", apellidos.value);
-    datos.append("email", email.value);
-    datos.append("password", password.value);
+    cargando.value = true
+    const datos = new FormData()
+    datos.append('nombre', nombre.value)
+    datos.append('apellidos', apellidos.value)
+    datos.append('email', email.value)
+    datos.append('password', password.value)
 
-    console.log(API_URL + '/api/auth/crearUsuario.php');
+    console.log(API_URL + '/api/auth/crearUsuario.php')
     const res = await fetch(`${API_URL}/api/auth/crearUsuario.php`, {
-      method: "POST",
+      method: 'POST',
       body: datos,
-    });
+    })
 
-    const data = await res.json();
+    const data = await res.json()
 
     if (!data.success) {
-      error.value = data.error || "No se pudo registrar";
-      return;
+      error.value = data.error || 'No se pudo registrar'
+      return
     }
 
-    const resultadoLogin = await auth.login(email.value, password.value);
+    const resultadoLogin = await auth.login(email.value, password.value)
 
     if (!resultadoLogin.ok) {
-         error.value =
+      error.value =
         resultadoLogin.message ||
-        "La cuenta se creó, pero no se pudo iniciar sesión automáticamente";
-      return;
+        'La cuenta se creó, pero no se pudo iniciar sesión automáticamente'
+      return
     }
 
-    mensaje.value = "Cuenta creada correctamente";
+    mensaje.value = 'Cuenta creada correctamente'
 
     setTimeout(() => {
-      router.push("/HomeUsuario");
-    }, 1200);
+      router.push('/HomeUsuario')
+    }, 1200)
   } catch (err) {
-    console.error("ERROR REAL: ", err);
-    error.value = "Error al conectar con el servidor";
-
+    console.error('ERROR REAL: ', err)
+    error.value = 'Error al conectar con el servidor' . err;
   } finally {
-    cargando.value = false;
+    cargando.value = false
   }
-};
+}
 </script>
 
 <template>
-    
   <div class="contenedor">
     <main class="form-signin w-100 m-auto">
       <form @submit.prevent="handleSubmit">
@@ -103,14 +101,26 @@ const handleSubmit = async () => {
         <div class="row">
           <div class="col-md-6">
             <div class="form-floating">
-              <input v-model="nombre" type="text" class="form-control" placeholder="Nombre" required />
+              <input
+                v-model="nombre"
+                type="text"
+                class="form-control"
+                placeholder="Nombre"
+                required
+              />
               <label>Nombre</label>
             </div>
           </div>
 
           <div class="col-md-6">
             <div class="form-floating">
-              <input v-model="apellidos" type="text" class="form-control" placeholder="Apellidos" required />
+              <input
+                v-model="apellidos"
+                type="text"
+                class="form-control"
+                placeholder="Apellidos"
+                required
+              />
               <label>Apellidos</label>
             </div>
           </div>
@@ -119,14 +129,28 @@ const handleSubmit = async () => {
         <div class="row">
           <div class="col-md-6">
             <div class="form-floating">
-              <input v-model="email" type="email" class="form-control" placeholder="Email" required />
+              <input
+                v-model="email"
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                required
+              />
               <label>Correo electrónico</label>
             </div>
           </div>
         </div>
 
         <div class="form-floating">
-          <input v-model="password" type="password" class="form-control" placeholder="Password" minlength="8" autocomplete="new-password" required />
+          <input
+            v-model="password"
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            minlength="8"
+            autocomplete="new-password"
+            required
+          />
           <label>Contraseña</label>
         </div>
 
@@ -135,25 +159,34 @@ const handleSubmit = async () => {
         </p>
 
         <div class="form-floating">
-          <input v-model="confirmPassword" type="password" class="form-control" placeholder="Confirm Password" minlength="8" autocomplete="new-password" required />
+          <input
+            v-model="confirmPassword"
+            type="password"
+            class="form-control"
+            placeholder="Confirm Password"
+            minlength="8"
+            autocomplete="new-password"
+            required
+          />
           <label>Confirmar contraseña</label>
         </div>
 
         <div class="form-check text-start my-3">
           <input class="form-check-input" type="checkbox" required />
           <label class="form-check-label">
-          <a href="/terminosCondiciones" target="_blank">Acepto los términos y condiciones</a>
+            <a href="/terminosCondiciones" target="_blank">Acepto los términos y condiciones</a>
           </label>
         </div>
 
         <button class="btn btn-primary w-100 py-2" type="submit" :disabled="cargando">
-          {{ cargando ? "Registrando..." : "Registrarse" }}
+          {{ cargando ? 'Registrando...' : 'Registrarse' }}
         </button>
         <br /><br />
 
-        <p class="text-body-secondary text-center">¿Ya tienes cuenta? <a href="/iniciarSesion">Inicia sesión</a></p>
-
+        <p class="text-body-secondary text-center">
+          ¿Ya tienes cuenta? <a href="/iniciarSesion">Inicia sesión</a>
+        </p>
       </form>
     </main>
-</div>
+  </div>
 </template>

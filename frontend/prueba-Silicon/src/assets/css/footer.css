@@ -1,0 +1,45 @@
+footer {
+    border-color: #dbeafe !important;
+    font-family: 'Coolvetica', Arial, sans-serif;
+}
+
+footer .text-body-secondary {
+    color: #66758a !important;
+}
+
+footer span {
+    font-size: 0.95rem;
+}
+
+footer a {
+    transition:
+            color 0.2s ease,
+            opacity 0.2s ease;
+}
+
+footer a:hover {
+    color: #2563eb !important;
+    opacity: 1;
+}
+
+footer .bi {
+    fill: currentColor;
+}
+
+@media (max-width: 767px) {
+    footer {
+        justify-content: center !important;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    footer .col-md-4 {
+        justify-content: center;
+        width: 100%;
+    }
+
+    footer .nav {
+        justify-content: center !important;
+        width: 100%;
+    }
+}

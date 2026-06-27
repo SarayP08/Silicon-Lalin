@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import '../assets/css/footer.css'
+</script>
 <template>
   <div class="container">
     <footer

@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "coolvetica";
+  src: url(./coolvetica/Coolvetica\ Rg.otf) format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "lemonMilk";
+  src: url(./lemon_milk/LEMONMILK-Medium.otf) format("opentype");
+  font-weight: normal;
+  font-style: italic;
+}

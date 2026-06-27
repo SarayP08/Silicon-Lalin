@@ -1,13 +1,29 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import {  useRoute, useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { API_URL } from '../../config/api.js'
 import { useAuthStore } from '../../stores/auth.js'
+import '../../assets/css/mover.css'
+import informaticaImg from '../../assets/img/informatica.jpg'
+import ofimaticaImg from '../../assets/img/ofimatica.avif'
+import mobiliarioImg from '../../assets/img/mobiliario.jpg'
+import otrosImg from '../../assets/img/otros.jpg'
 
 const router = useRouter()
 const auth = useAuthStore()
 const route = useRoute()
 const material = ref('')
+
+const imagenesCategoria = {
+  informatica: informaticaImg,
+  ofimatica: ofimaticaImg,
+  mobiliario: mobiliarioImg,
+  otros: otrosImg,
+}
+
+const imagenMaterial = (categoria) => {
+  return imagenesCategoria[categoria] || otrosImg
+}
 
 const error = ref('')
 const cargando = ref(true)
@@ -50,9 +66,6 @@ const cargarMovimientos = async () => {
       throw new Error(data?.error || 'No se pudo cargar los movimientos')
     }
 
-    console.log('MOVIMIENTOS:', data)
-    console.log('MATERIAL:', material.value)
-
     movimientos.value = Array.isArray(data) ? data : []
   } catch (e) {
     console.error(e)
@@ -69,13 +82,11 @@ onMounted(async () => {
       cache: 'no-store',
     })
     const data = await res.json()
-    console.log(' DATA RECIBIDA: ', data)
     if (data.error) {
       error.value = data.message || 'No se pudo cargar el material'
       material.value = null
     } else {
       material.value = data
-      console.log(' DATA después: ', material)
     }
   } catch (err) {
     error.value = 'Error al conectar con el servidor'
@@ -180,7 +191,6 @@ const actualizarMovimiento = async () => {
     })
 
     const texto = await respuesta.text()
-    console.log('RESPUESTA NUEVO MOVIMIENTO:', texto)
 
     const resultado = JSON.parse(texto)
     if (!resultado.success) {
@@ -222,7 +232,10 @@ const recuperarPersona = async () => {
     <section v-if="material" class="row justify-content-center mb-4">
       <div class="col-md-6 col-lg-4">
         <div class="card shadow-sm">
-          <img src="../../assets/img/fondo_provisional.png" class="card-img-top" alt="Material" />
+          <img
+            :src="imagenMaterial(material.categoria)"
+            :alt="material.categoria"
+            class="card-img-top material-img"/>
 
           <div class="card-body">
             <h5 class="card-title">{{ material.nombre }}</h5>
@@ -245,29 +258,25 @@ const recuperarPersona = async () => {
               <input
                 class="form-control mb-3"
                 :value="pintarUbiOrigen(movimientoActual).nombre"
-                disabled
-              />
+                disabled/>
 
               <label class="form-label">NIF</label>
               <input
                 class="form-control mb-3"
                 :value="pintarUbiOrigen(movimientoActual).nif"
-                disabled
-              />
+                disabled/>
 
               <label class="form-label">Correo</label>
               <input
                 class="form-control mb-3"
                 :value="pintarUbiOrigen(movimientoActual).correo"
-                disabled
-              />
+                disabled/>
 
               <label class="form-label">Teléfono</label>
               <input
                 class="form-control"
                 :value="pintarUbiOrigen(movimientoActual).telefono"
-                disabled
-              />
+                disabled/>
             </div>
 
             <div v-else-if="pintarUbiOrigen(movimientoActual)?.tipo === 'ubicacion'">
@@ -275,29 +284,25 @@ const recuperarPersona = async () => {
               <input
                 class="form-control mb-3"
                 :value="pintarUbiOrigen(movimientoActual).ubicacion"
-                disabled
-              />
+                disabled/>
 
               <label class="form-label">Dirección</label>
               <input
                 class="form-control mb-3"
                 :value="pintarUbiOrigen(movimientoActual).direccion"
-                disabled
-              />
+                disabled/>
 
               <label class="form-label">CP</label>
               <input
                 class="form-control mb-3"
                 :value="pintarUbiOrigen(movimientoActual).cp"
-                disabled
-              />
+                disabled/>
 
               <label class="form-label">Provincia</label>
               <input
                 class="form-control"
                 :value="pintarUbiOrigen(movimientoActual).provincia"
-                disabled
-              />
+                disabled/>
             </div>
 
             <p v-else class="text-muted mb-0">Sin origen registrado</p>
@@ -351,8 +356,7 @@ const recuperarPersona = async () => {
               <input
                 class="form-control mb-3"
                 v-model="nuevoDestino.persona.nif"
-                @blur="recuperarPersona"
-              />
+                @blur="recuperarPersona"/>
 
               <label class="form-label">Correo</label>
               <input class="form-control mb-3" v-model="nuevoDestino.persona.correo" />

@@ -1,0 +1,18 @@
+.container .btn,
+.container a.btn,
+.container button.btn {
+    font-family: Lemon Milk, Arial, sans-serif;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+}
+
+.container .card-footer .btn {
+    border-radius: 0.65rem;
+    padding: 0.65rem 1rem;
+}
+
+.container .btn-outline-success {
+    border-radius: 0.55rem;
+    font-size: 0.9rem;
+}

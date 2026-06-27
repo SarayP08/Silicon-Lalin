@@ -1,0 +1,124 @@
+.contenedor {
+    min-height: calc(100vh - 96px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    background:
+            radial-gradient(circle at top left, #eaf4ff 0, transparent 32rem),
+            linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+}
+
+.form-signin {
+    max-width: 420px;
+}
+
+.form-signin form {
+    padding: 2.25rem;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid #dbeafe;
+    border-radius: 1rem;
+    box-shadow: 0 18px 45px rgba(30, 64, 175, 0.1);
+}
+
+.form-signin .bi-person {
+    color: #2563eb !important;
+}
+
+.form-signin h1 {
+    font-family: 'Lemon Milk', 'Coolvetica', Arial, sans-serif;
+    color: #172033;
+    font-size: 1.25rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.form-floating {
+    font-family: 'Coolvetica', Arial, sans-serif;
+}
+
+.form-control {
+    border: 1px solid #cfe0f5;
+    border-radius: 0.7rem;
+    color: #172033;
+}
+
+.form-control:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 0.2rem rgba(96, 165, 250, 0.18);
+}
+
+.form-floating > label {
+    color: #6b7c93;
+}
+
+.form-check-label {
+    font-family: 'Coolvetica', Arial, sans-serif;
+    color: #4b5f78;
+}
+
+.form-check-input {
+    border-color: #9db9d8;
+}
+
+.form-check-input:checked {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.alert-danger {
+    border: 0;
+    border-radius: 0.7rem;
+    background: #fee2e2;
+    color: #991b1b;
+    font-family: 'Coolvetica', Arial, sans-serif;
+}
+
+.btn-primary {
+    border: 0;
+    border-radius: 0.75rem;
+    background: #2563eb;
+    font-family: 'Coolvetica', Arial, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.btn-primary:disabled {
+    background: #93c5fd;
+}
+
+.text-body-secondary {
+    font-family: 'Coolvetica', Arial, sans-serif;
+    color: #66758a !important;
+}
+
+.text-body-secondary a {
+    color: #2563eb;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.text-body-secondary a:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+    .contenedor {
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+
+    .form-signin form {
+        padding: 1.5rem;
+        border-radius: 0.85rem;
+    }
+
+    .form-signin h1 {
+        font-size: 1.05rem;
+    }
+}

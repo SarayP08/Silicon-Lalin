@@ -1,0 +1,52 @@
+.page h1 {
+    font-family: "lemonMilk", Arial, sans-serif;
+    color: #172033;
+}
+
+.form-control {
+    border-color: #bfdbfe;
+    border-radius: 0.65rem;
+    font-family: "coolvetica", Arial, sans-serif;
+}
+
+.material-img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.card {
+    border: 1px solid #dbeafe;
+    border-radius: 0.85rem;
+    overflow: hidden;
+}
+
+.card-title,
+.btn-detalle {
+    font-family: "coolvetica", Arial, sans-serif;
+}
+
+.page .card .card-body a.btn.btn-detalle {
+    margin-top: auto;
+    padding: 0.65rem 1rem;
+    color: #2563eb;
+    background: #ffffff;
+    border: 1px solid #bfdbfe;
+    border-radius: 0.65rem;
+    font-family: "Lemon Milk" !important;
+    font-size: 1rem;
+    font-weight: 500 !important;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+}
+
+.page .card .card-body a.btn.btn-detalle:hover {
+    color: #ffffff;
+    background: #2563eb;
+    border-color: #2563eb;
+}
+.btn-detalle:hover {
+    color: #ffffff;
+    background: #2563eb;
+    border-color: #2563eb;
+}

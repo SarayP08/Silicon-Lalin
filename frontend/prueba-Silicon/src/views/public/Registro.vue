@@ -72,7 +72,6 @@ const handleSubmit = async () => {
       router.push('/HomeUsuario')
     }, 1200)
   } catch (err) {
-    console.error('ERROR REAL: ', err)
     error.value = 'Error al conectar con el servidor';
   } finally {
     cargando.value = false

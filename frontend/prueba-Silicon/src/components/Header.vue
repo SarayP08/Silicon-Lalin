@@ -1,22 +1,20 @@
 <script setup>
-import { ref } from "vue";
-import '../assets/css/header.css';
+import { ref } from 'vue'
+import '../assets/css/header.css'
 </script>
 
-<template> 
- <div class="container">
-        <header
-          class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-          <a href="/"
-            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-            <img src="../assets/img/icono/icono.png" alt="logo" class="logo"> 
-            <span class="fs-4">Mercancías Deza</span>
-          </a>
-          <ul class="nav nav-pills">
-            <li class="nav-item">
-              <a href="/Registro" class="nav-link active" aria-current="page">Registrarse</a>
-            </li>
-          </ul>
-        </header>
-      </div>
+<template>
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <img src="../assets/img/icono/icono.png" alt="logo" class="logo" />
+        <span class="fs-4">Materiales Deza</span>
+      </a>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a href="/Registro" class="nav-link active" aria-current="page">Registrarse</a>
+        </li>
+      </ul>
+    </header>
+  </div>
 </template>

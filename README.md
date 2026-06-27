@@ -5,7 +5,7 @@
   
   El sistema creado permite añadir materiales, eliminarlos o modificar sus estados a través de movimientos. También permite tramitar devoluciones y proporciona un sistema de rastreo, de esta forma, cualquier usuario autorizado en la plataforma podrá consultar el estado de un material y saber en todo momento cuál es su ubicación o persona a cargo actual. 
   
-  La aplicación incluye un sistema de autenticación simple, diferenciando entre usuarios comunes y administradores, aquellos usuarios con el rol de "administrador" son quienes pueden validar una petición de devolución llevada a cabo sobre un material en específico, mantiéndose todo en el historial del propio material, por lo que no se pierde la información, facilitando así la trazabilidad del mismo.  
+  La aplicación incluye un sistema de autenticación simple, diferenciando entre usuarios comunes y administradores, aquellos usuarios con el rol de "administrador" son quienes pueden validar una petición de devolución llevada a cabo sobre un material en específico, manteniéndose todo en el historial del propio material, por lo que no se pierde la información, facilitando así la trazabilidad del mismo.  
   
   El proyecto está desarrollado con Vue 3 en la parte frontend, PHP y MySQL/MariaDB en el backend, para su prueba se ha utilizado xampp como entorno local de ejecución. 
 
@@ -55,13 +55,13 @@
 
   # Decisiones técnicas tomadas y justificación de las soluciones implementadas
   
-  El frontend de la aplicación, como se ha mencionado antes, se ha desarrollado con Vue 3 y Vite, frameworks que permiten crear una interfaz dinámica y organizar la aplicación mediante componentes y vistas. Durante mis prácticas y desarrollo del proyecto final, trabajé con esta tecnología, por lo que no representaba una curva de aprendizaje importante para la realización de esta aplicación web.
+  El frontend de la aplicación, como se ha mencionado antes, se ha desarrollado con Vue 3 y Vite, herramientas que permiten crear una interfaz dinámica y organizar la aplicación mediante componentes y vistas. Durante mis prácticas y desarrollo del proyecto final, trabajé con esta tecnología, por lo que no representaba una curva de aprendizaje importante para la realización de esta aplicación web.
 
   Para la navegación entre pantallas he utilizado Vue Router, lo que me permite separar las vistas de la aplicación, como el inicio de sesión, el registro, el listado de materiales, etc. La gestión de la sesión en el frontend la he hecho con Pinia, una librería oficial diseñada para ser intuitiva y ligera, aquí me centralicé en controlar los datos del usuario autenticado y en la comprobación de los mismos para realizar las diferentes acciones disponibles en la página, con foco en el área de devolución de material.  
 
   El backend se ha realizado con PHP y MySQL/Mariadb, utilizando Xampp como entorno local. Esta elección parte de mi familiarización con ambos, el lenguaje y la herramienta, ya que durante el Ciclo de Desarrollo de Aplicaciones Web nos centramos en estas tecnologías a la hora de desarrollar. Además, PHP permite una arquitectura sencilla, donde sólo se encarga de recibir peticiones del front y devolver los datos, teniendo una buena comunicación con las bases de datos. 
 
-  Aunque el sistema de sesiones sea sencillo, quise "protegerlo" por lo realicé un hash sobre las contraseñas, para valorar la seguridad en la aplicación y la confianza. 
+  Aunque el sistema de sesiones sea sencillo, quise "protegerlo" por lo que realicé un hash sobre las contraseñas, para valorar la seguridad en la aplicación y la confianza. 
 
   El ámbito más importante de la aplicación fue el control de la tabla de *movimiento_material* ya que representaba el flujo y objetivo principal de la página, la trazabilidad de cada material. Aquí me encargué de asociar mediante claves foráneas, todos los factores e individuos que intervenían en un movimiento, para poder recuperar los datos de forma correcta sin que se perdiese nada, además, estas claves foráneas me ayudaron a mantener la integridad de los datos entre los distintos actores de la plataforma, utilicé eliminación en cascada sobre algunas para evitar registros "huérfanos". 
 

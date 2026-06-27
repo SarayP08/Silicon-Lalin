@@ -21,7 +21,7 @@ const auth = useAuthStore();
     </section>
 
     <section class="dashboard-grid">
-      <article class="dashboard-card cats-card">
+      <article class="dashboard-card">
         <div class="card-top">
           <div class="dashboard-icon">
             <i class="bi bi-heart-fill"></i>

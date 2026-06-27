@@ -22,7 +22,6 @@ const login = async () => {
     const redirect = route.query.redirect;
 
     if (redirect) {
-      console.log();
       router.push(redirect);
       } else {
         router.push("/HomeUsuario");

@@ -73,7 +73,7 @@ const handleSubmit = async () => {
     }, 1200)
   } catch (err) {
     console.error('ERROR REAL: ', err)
-    error.value = 'Error al conectar con el servidor' . err;
+    error.value = 'Error al conectar con el servidor';
   } finally {
     cargando.value = false
   }

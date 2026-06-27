@@ -12,18 +12,15 @@ const auth = useAuthStore();
     <section class="admin-hero">
       <div>
         <p class="admin-label">Panel de administración</p>
-
         <h1>
-          Bienvenid@,
-          {{ auth.usuario?.nombre || "Admin" }}
+          ¡Bienvenid@!
+          {{ auth.usuario?.nombre }}
         </h1>
-
-        <p class="admin-description">Gestiona la mercancía, devuévela o consulta su estado.</p>
+        <p class="admin-description">Gestiona cada material en tu plataforma de confianza</p>
       </div>
     </section>
 
     <section class="dashboard-grid">
-
       <article class="dashboard-card cats-card">
         <div class="card-top">
           <div class="dashboard-icon">
@@ -31,19 +28,18 @@ const auth = useAuthStore();
           </div>
         </div>
 
-        <h2>Mercancías</h2>
-
-        <p>Administra las mercancías disponibles.</p>
+        <h2>Materiales</h2>
+        <p>Administra o crea los materiales disponibles.</p>
 
         <div class="action-list">
           <RouterLink class="action-btn" to="/Mercancias">
             <i class="bi bi-card-list"></i>
-            Ver mercancías
+            Ver materiales
           </RouterLink>
 
           <RouterLink class="action-btn" to="/Añadir">
             <i class="bi bi-plus-circle"></i>
-            Añadir nueva mercancía
+            Añadir nuevo material
           </RouterLink>
         </div>
       </article>

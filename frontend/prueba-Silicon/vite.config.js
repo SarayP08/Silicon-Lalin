@@ -11,7 +11,6 @@ export default defineConfig({
     vueDevTools(),
   ],
   server: {
-    // Backend CORS is hard-coded to allow http://localhost:5173
     port: 5173,
     strictPort: true,
   },

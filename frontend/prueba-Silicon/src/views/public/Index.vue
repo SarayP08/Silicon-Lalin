@@ -1,8 +1,8 @@
 <script setup>
-import {onMounted, onUnmounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useAuthStore } from "../../stores/auth.js";
 import { useRouter, useRoute } from "vue-router";
-
+import '../../assets/css/login.css';
 
 const auth = useAuthStore();
 const router = useRouter();

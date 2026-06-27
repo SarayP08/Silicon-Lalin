@@ -28,5 +28,4 @@ $materiales = [];
 while ($row = $result->fetch_assoc()) {
     $materiales[] = $row;
 }
-
 echo json_encode($materiales);

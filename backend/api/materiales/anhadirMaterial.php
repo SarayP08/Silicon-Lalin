@@ -1,5 +1,4 @@
 <?php
-
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: http://localhost:5173");
@@ -13,24 +12,35 @@ if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
 
 require_once __DIR__ . "/../config/conexion.php";
 
+$data = json_decode(
+    file_get_contents('php://input'),
+    true
+);
+
 $codigo = trim($_POST["codigo"] ?? "");
 $nombreMaterial = trim($_POST["nombre"] ?? "");
 $descripcion = trim($_POST["descripcion"] ?? "");
 $categoria = trim($_POST["categoria"] ?? "");
 $persona = trim($_POST["id_persona"] ?? "");
 $ubicacion = trim($_POST["id_ubicacion"] ?? "");
+$idUsuario = isset($_POST["id_usuario"])? intval($_POST[ "id_usuario"]) : null;
 
 $persona = $persona === "" ? null : (int)$persona;
 $ubicacion = $ubicacion === "" ? null : (int)$ubicacion;
 
-    //AÑADIR PERSONA
     if ($persona === null && !empty($_POST["nif"])) {
         $nif = trim($_POST["nif"] ?? "");
-        $nombrePersona = trim($_POST["nombre_persona"] ?? "");
+        $nombrePersona = trim($_POST["nombre_persona"] ?? ($_POST["nombre"] ?? ""));
         $apellidos = trim($_POST["apellidos"] ?? "");
         $email = trim($_POST["correo"] ?? "");
         $telefono = trim($_POST["telefono"] ?? "");
-
+        if($nombrePersona === "" || $apellidos === "") {
+            echo json_encode([
+                "success" => false,
+                "error" => "Nombre y apellidos obligatorios"
+            ]);
+            exit;
+        }
         $sqlPersona = "INSERT INTO persona (nif, nombre, apellidos, correo, telefono) VALUES (?, ?, ?, ?, ?)";
         $stmtPersona = $conn->prepare($sqlPersona);
 
@@ -53,7 +63,6 @@ $ubicacion = $ubicacion === "" ? null : (int)$ubicacion;
         $stmtPersona->close();
     }
 
-    // AÑADIR UBICACIÓN
     if ($ubicacion === null && !empty($_POST["tipo"])) {
         $tipo = trim($_POST["tipo"] ?? "");
         $CP = trim($_POST["CP"] ?? "");
@@ -82,21 +91,19 @@ $ubicacion = $ubicacion === "" ? null : (int)$ubicacion;
     }
 
 $sql = "
-INSERT INTO material
-(
-    codigo,
-    nombre,
-    descripcion,
-    categoria, 
-    id_persona, 
-    id_ubicacion
-)
-VALUES (?, ?, ?, ?, ?, ?)";
+    INSERT INTO material(
+        codigo,
+        nombre,
+        descripcion,
+        categoria, 
+        id_persona, 
+        id_ubicacion
+        )
+    VALUES (?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
-
     echo json_encode([
         "success" => false,
         "error" => $conn->error
@@ -126,8 +133,8 @@ $stmt->close();
 
 $sqlMovimiento = "
     INSERT INTO movimiento_material 
-    (id_material, id_persona, id_origen, id_destino,  fecha_movimiento)
-    VALUES (?, ?, ?, ?, NOW())";
+    (id_material, id_persona, id_usuario, id_origen, id_destino,  fecha_movimiento)
+    VALUES (?, ?, ?, ?, ?, NOW())";
 
 $stmtMovimiento = $conn->prepare($sqlMovimiento);
 
@@ -148,7 +155,7 @@ if ($persona !== null) {
     $idDestino = null;
 }
 
-$stmtMovimiento->bind_param("iiii", $idMaterial, $idPersonaMovimiento, $idOrigen, $idDestino);
+$stmtMovimiento->bind_param("iiiii", $idMaterial, $idPersonaMovimiento, $idUsuario, $idOrigen, $idDestino);
     if (!$stmtMovimiento->execute()) {
         echo json_encode([
             "success" => false,

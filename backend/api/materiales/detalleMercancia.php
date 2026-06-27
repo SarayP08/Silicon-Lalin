@@ -1,4 +1,5 @@
 <?php
+session_start();
 header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: http://localhost:5173");
@@ -8,8 +9,6 @@ header("Access-Control-Allow-Headers: Content-Type");
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
-
-session_start();
 
 require_once __DIR__ . '/../config/conexion.php';
 
@@ -48,7 +47,6 @@ $material = $result->fetch_assoc();
 $stmt->close();
 
 if (!$material) {
-
     echo json_encode([
         "success" => false,
         "error" => "Mercancia no encontrado"

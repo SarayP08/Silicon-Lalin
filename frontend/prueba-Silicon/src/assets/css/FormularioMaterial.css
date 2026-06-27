@@ -1,0 +1,103 @@
+.container.py-4 {
+    max-width: 960px;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+}
+
+.card {
+    border: 1px solid #dbeafe;
+    border-radius: 1rem;
+    box-shadow: 0 12px 32px rgba(30, 64, 175, 0.07) !important;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.text-muted {
+    color: #2563eb !important;
+    font-family: "coolvetica", Arial, sans-serif;
+    font-size: 1rem;
+}
+
+h1,
+h2 {
+    color: #172033;
+    font-family: "lemonMilk", Arial, sans-serif;
+}
+
+h1 {
+    font-size: 1.8rem !important;
+}
+
+h2 {
+    font-size: 1.15rem !important;
+}
+
+.form-label {
+    color: #172033;
+    font-family: "coolvetica", Arial, sans-serif;
+    font-size: 1rem;
+}
+
+.form-control,
+.form-select {
+    border: 1px solid #bfdbfe;
+    border-radius: 0.65rem;
+    font-family: "coolvetica", Arial, sans-serif;
+    font-size: 1rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.12);
+}
+
+.alert {
+    border: 0;
+    border-radius: 0.65rem;
+    font-family: "coolvetica", Arial, sans-serif;
+}
+
+.alert-danger {
+    color: #991b1b;
+    background: #fee2e2;
+}
+
+.alert-success {
+    color: #166534;
+    background: #dcfce7;
+}
+
+.btn {
+    border-radius: 0.65rem;
+    font-family: "coolvetica", Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+form .btn,
+form .btn-primary,
+form .btn-secondary,
+form a.btn,
+form button.btn {
+    font-family: "coolvetica", Arial, sans-serif !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+}
+
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .d-flex.justify-content-end {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

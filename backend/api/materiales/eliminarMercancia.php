@@ -31,7 +31,7 @@ $stmt->bind_param("i", $id);
 if (!$stmt->execute()) {
     echo json_encode([
         "success" => false,
-        "error" => $stmt->error
+        "error" => "No se pudo eliminar el material"
     ]);
     exit;
 }

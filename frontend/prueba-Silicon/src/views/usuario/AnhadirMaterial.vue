@@ -111,7 +111,6 @@ const añadirMaterial = async () => {
       datos.append('direccion', formulario.value.ubicacion.direccion)
     }
 
-    console.log('DATOS A ENVIAR: ', formulario.value)
     const respuesta = await fetch(`${API_URL}/api/materiales/anhadirMaterial.php`, {
       method: 'POST',
       body: datos,
@@ -119,7 +118,6 @@ const añadirMaterial = async () => {
     })
 
     const texto = await respuesta.text()
-    console.log('RESPUESTA PHP: ', texto)
     const resultado = JSON.parse(texto)
 
     if (!respuesta.ok || resultado.error) {
@@ -158,8 +156,7 @@ const añadirMaterial = async () => {
                 v-model="formulario.codigo"
                 type="text"
                 class="form-control"
-                placeholder="Ej: ECC9827"
-              />
+                placeholder="Ej: ECC9827"/>
             </div>
 
             <div class="col-md-6">
@@ -169,8 +166,7 @@ const añadirMaterial = async () => {
                 v-model="formulario.nombre"
                 type="text"
                 class="form-control"
-                placeholder="Paquete de pinturas"
-              />
+                placeholder="Paquete de pinturas"/>
             </div>
 
             <div class="col-12">
@@ -180,8 +176,7 @@ const añadirMaterial = async () => {
                 v-model="formulario.descripcion"
                 class="form-control"
                 rows="4"
-                placeholder="Describe máx. 500 caracteres)"
-              ></textarea>
+                placeholder="Ingresa una descripción)"></textarea>
             </div>
 
             <div class="col-md-6">
@@ -207,7 +202,6 @@ const añadirMaterial = async () => {
 
           <div v-if="formulario.asignar === 'persona'" class="mt-4">
             <h2 class="h5 mb-3">Datos de la persona</h2>
-
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">NIF</label>
@@ -216,8 +210,7 @@ const añadirMaterial = async () => {
                   type="text"
                   class="form-control"
                   placeholder="Ej: 12345678A"
-                  @blur="recuperarPersona"
-                />
+                  @blur="recuperarPersona"/>
               </div>
 
               <div class="col-md-6">
@@ -225,8 +218,7 @@ const añadirMaterial = async () => {
                 <input
                   v-model="formulario.persona.nombre_persona"
                   type="text"
-                  class="form-control"
-                />
+                  class="form-control"/>
               </div>
 
               <div class="col-md-6">
@@ -282,7 +274,6 @@ const añadirMaterial = async () => {
 
           <div class="d-flex justify-content-end gap-2 mt-4">
             <RouterLink to="/HomeUsuario" class="btn btn-secondary"> Volver </RouterLink>
-
             <button class="btn btn-primary" type="submit" :disabled="cargando">
               {{ cargando ? 'Añadiendo...' : 'Añadir material' }}
             </button>

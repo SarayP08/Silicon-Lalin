@@ -49,7 +49,6 @@ if (!$stmt) {
     echo json_encode([
         "ok" => false,
         "message" => "Error preparando consulta",
-        "debug" => $conn->error
     ]);
     exit;
 }

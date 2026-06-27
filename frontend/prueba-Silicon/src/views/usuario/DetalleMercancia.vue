@@ -3,6 +3,11 @@ import { computed, onMounted, ref } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { API_URL } from '../../config/api.js'
 import { useAuthStore } from '../../stores/auth.js'
+import '../../assets/css/detalleMaterial.css'
+import informaticaImg from '../../assets/img/informatica.jpg'
+import ofimaticaImg from '../../assets/img/ofimatica.avif'
+import mobiliarioImg from '../../assets/img/mobiliario.jpg'
+import otrosImg from '../../assets/img/otros.jpg'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -16,6 +21,17 @@ const movimientos = ref([])
 const validandoPorId = ref({})
 const validadoPorId = ref({})
 const errorValidacion = ref('')
+
+const imagenesCategoria = {
+  informatica: informaticaImg,
+  ofimatica: ofimaticaImg,
+  mobiliario: mobiliarioImg,
+  otros: otrosImg,
+}
+
+const imagenMaterial = (categoria) => {
+  return imagenesCategoria[categoria] || otrosImg
+}
 
 const esAdmin = computed(() => auth.usuario?.rol === 'admin')
 
@@ -35,7 +51,6 @@ const eliminarMaterial = async () => {
 
   try {
     const id = route.params.id
-
     const res = await fetch(`${API_URL}/api/materiales/eliminarMercancia.php?id=${id}`, {
       method: 'DELETE',
       credentials: 'include',
@@ -61,13 +76,11 @@ onMounted(async () => {
       credentials: 'include',
     })
     const data = await res.json()
-    console.log(' DATA RECIBIDA: ', data)
     if (data.error) {
       error.value = data.message || 'No se pudo cargar el material'
       material.value = null
     } else {
       material.value = data
-      console.log(' DATA después: ', material)
     }
 
     await cargarMovimientos()
@@ -81,7 +94,6 @@ onMounted(async () => {
 
 const cargarMovimientos = async () => {
   error.value = ''
-
   try {
     const id = route.params.id
     const respuesta = await fetch(
@@ -92,8 +104,6 @@ const cargarMovimientos = async () => {
     )
 
     const resultado = await respuesta.json()
-
-    console.log('HISTORIAL:', resultado)
 
     if (!respuesta.ok) {
       throw new Error(resultado.error || 'No se pudo cargar los movimientos')
@@ -217,9 +227,9 @@ const validarDevolucion = async (movimiento) => {
           <div class="row g-0">
             <div class="col-md-4">
               <img
-                src="../../assets/img/fondo_provisional.png"
-                class="img-fluid rounded-start h-100"
-                alt="Material"
+                :src="imagenMaterial(material.categoria)"
+                class="img-fluid rounded-start h-100 material-detail-img"
+                :alt="material.categoria"
               />
             </div>
 
@@ -256,15 +266,13 @@ const validarDevolucion = async (movimiento) => {
                 <div class="d-grid gap-2 d-md-flex">
                   <RouterLink
                     :to="`/Movimiento/${material.id_material}`"
-                    class="btn btn-primary flex-fill"
-                  >
+                    class="btn btn-primary flex-fill" >
                     Nuevo movimiento
                   </RouterLink>
 
                   <RouterLink
                     :to="`/Movimiento/${material.id_material}`"
-                    class="btn btn-warning flex-fill"
-                  >
+                    class="btn btn-warning flex-fill">
                     Devolver
                   </RouterLink>
 
@@ -300,10 +308,8 @@ const validarDevolucion = async (movimiento) => {
         v-for="(movimiento, idx) in movimientos"
         :key="
           movimiento.id_movimiento ??
-          `${movimiento.fecha_movimiento}-${movimiento.tipo_movimiento ?? ''}-${movimiento.nif ?? ''}-${movimiento.tipo_destino ?? ''}-${idx}`
-        "
-        class="col-lg-6"
-      >
+          `${movimiento.fecha_movimiento}-${movimiento.tipo_movimiento ?? ''}-${movimiento.nif ?? ''}-${movimiento.tipo_destino ?? ''}-${idx}`"
+        class="col-lg-6">
         <div class="card shadow h-100">
           <div class="card-header d-flex justify-content-between align-items-center">
             <p>
@@ -325,8 +331,7 @@ const validarDevolucion = async (movimiento) => {
               class="btn btn-sm btn-outline-success"
               :disabled="validandoPorId[movimiento.id_movimiento]"
               @click="validarDevolucion(movimiento)"
-              type="button"
-            >
+              type="button">
               {{ validandoPorId[movimiento.id_movimiento] ? 'Validando...' : 'Devolver' }}
             </button>
           </div>

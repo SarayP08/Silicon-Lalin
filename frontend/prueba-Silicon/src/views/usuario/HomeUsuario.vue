@@ -1,10 +1,8 @@
 <script setup>
-import { onMounted, ref } from "vue";
-import { API_URL } from "../../config/api.js";
-import { useAuthStore } from "../../stores/auth.js";
-import '../../assets/css/homeAdmin.css';
+import { useAuthStore } from '../../stores/auth.js'
+import '../../assets/css/homeAdmin.css'
 
-const auth = useAuthStore();
+const auth = useAuthStore()
 </script>
 
 <template>
@@ -24,7 +22,7 @@ const auth = useAuthStore();
       <article class="dashboard-card">
         <div class="card-top">
           <div class="dashboard-icon">
-            <i class="bi bi-heart-fill"></i>
+            <i class="bi bi-box-seam"></i>
           </div>
         </div>
 

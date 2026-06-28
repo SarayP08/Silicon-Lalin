@@ -5,7 +5,7 @@
   
   El sistema creado permite añadir materiales, eliminarlos o modificar sus estados a través de movimientos. También permite tramitar devoluciones y proporciona un sistema de rastreo, de esta forma, cualquier usuario autorizado en la plataforma podrá consultar el estado de un material y saber en todo momento cuál es su ubicación o persona a cargo actual. 
   
-  La aplicación incluye un sistema de autenticación simple, diferenciando entre usuarios comunes y administradores, aquellos usuarios con el rol de "administrador" son quienes pueden validar una petición de devolución llevada a cabo sobre un material en específico, manteniéndose todo en el historial del propio material, por lo que no se pierde la información, facilitando así la trazabilidad del mismo.  
+  La aplicación incluye un sistema de autenticación simple, diferenciando entre usuarios comunes y administradores, aquellos usuarios con el rol de "administrador" son quienes pueden validar una petición de devolución llevada a cabo sobre un material en específico, manteniéndose todo en el historial del propio material, por lo que no se pierde la información, facilitando así la trazabilidad del mismo. 
   
   El proyecto está desarrollado con Vue 3 en la parte frontend, PHP y MySQL/MariaDB en el backend, para su prueba se ha utilizado xampp como entorno local de ejecución. 
 
@@ -66,6 +66,8 @@
   El ámbito más importante de la aplicación fue el control de la tabla de *movimiento_material* ya que representaba el flujo y objetivo principal de la página, la trazabilidad de cada material. Aquí me encargué de asociar mediante claves foráneas, todos los factores e individuos que intervenían en un movimiento, para poder recuperar los datos de forma correcta sin que se perdiese nada, además, estas claves foráneas me ayudaron a mantener la integridad de los datos entre los distintos actores de la plataforma, utilicé eliminación en cascada sobre algunas para evitar registros "huérfanos". 
 
   En el frontend se ha utilizado Bootstrap y Bootstrap icons para crear una interfaz sencilla, amigable y responsive, además de que facilitaba las áreas de desarrollo, debido a que el diseño no resultaba tan largo gracias a esta herramienta. 
+
+  Por último, cuando se registra un material o se añade un nuevo movimiento, al introducir los datos en el campo NIF y hacer click fuera, el sistema busca en la tabla de personas una asociada a este campo, si existe, el formulario carga automáticamente el resto de los datos, sino, se pueden rellenar manualmente. 
   
   
      
